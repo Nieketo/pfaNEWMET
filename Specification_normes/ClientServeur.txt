@@ -1,0 +1,35 @@
+//TODO : definir norme pour : 
+coord : coordonnées des cases (linéarisation?)
+content : contenu des cases (entiers? 0 : rien, 1 : mur, 2 : PNJ ...)
+
+CLIENT <=> SERVEUR
+
+moveTo(coord_dst) => transmet au SERVEUR les coordonnées de destination (type: coord)
+
+revealMap(...) => transmet au CLIENT les nouvelles informations (type : coord[], content[]) => type "intel"
+
+
+CLIENT : 
+a une copie de la carte en interne, MAIS : seul le contenu découvert est transmis (le reste est inconnu)
+=> tableau de contenu :
+carte[i] = content de la case i =>type carte
+
+=> updateMap(carte, intel)
+=> displayMap(carte)
+
+SERVEUR : 
+boolean move_isPossible(Player, coord_dst, carte) 		        Player est l'object player (le serveur y a dont accès)
+																Contient tout ce qui est coordonnées actuelles, vision etc... ET : 
+																	tableau de booléens : hasVisited[i] = true si la case i est découverte par le joueur
+
+void move_make(coord_dst) 										Modifie les coordonnées du player
+
+interract_with(Player, Map):
+	calls : 
+		boolean interract_isPossible(Player, coord_dst, Map)	
+		content interract_typeOf(coord_dst, Map)        		Indique le type de content de la case (trap, PNJ, rien...)
+		interract_make(Player, coord_dst, Map, content)	
+			switch on content, calls :
+				interract_make_trap(Player, coord_dst, Map)		Certains des arguments peuvent se révéler inutile en fonction du type d'interraction
+				interract_make_pnj(Player, coord_dst, Map)		mais ca gêne pas de les ajouter
+
