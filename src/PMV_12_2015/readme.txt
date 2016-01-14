@@ -9,3 +9,6 @@ lancé dans le dossier contenant le json devrait automatiquement installé les p
 $pip install nodeenv
 
 $npm install
+
+Ensuite on lance le serveur.js :
+$./serveur.js
