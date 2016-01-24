@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <link href="../styles/style.css" rel="stylesheet" type="text/css">
+        <title>Bienvenue dans le labyrinthe !</title>
+        <style>
+            a {text-decoration: none; color: black;}
+        </style>
+    </head>
+    <body>
+
+      <div class="game">
+
+          <%if (map[ord][abs] == 0){ %>
+            <img class="mm" src="../styles/images/player.png">
+          <% } %>
+
+<!-- Coin gauche haut -->
+        <% if (map[ord+1][abs-1] == 1){%>
+          <img class="hg" src="../styles/images/mur.png">
+        <% } %>
+
+        <%if (map[ord+1][abs-1] == 0){ %>
+          <img class="hg" src="../styles/images/vide.png">
+        <% } %>
+
+        <!-- Pas coin : 3 alignés -->
+        <% if ((map[ord+1][abs-1] == 1 && map[ord+1][abs] == 1 && map[ord+1][abs-2] == 1 && map[ord][abs-1] == 0) ||
+               (map[ord+1][abs-1] == 1 && map[ord][abs-1] == 1 && map[ord+2][abs-1] == 1 && map[ord+1][abs] == 0)){%>
+          <img class="hg" src="../styles/images/carre.png">
+        <% } %>
+
+        <!-- Coin : type 1 -->
+        <% if ((map[ord+1][abs-1] == 1 && map[ord][abs-1] == 1 && map[ord+1][abs] == 1)){%>
+          <img class="hg" src="../styles/images/carre1.png">
+        <% } %>
+
+        <!-- Coin : type 2 -->
+          <% if ((map[ord+1][abs-1] == 1 && map[ord+2][abs-1] == 1 && map[ord+1][abs-2] == 1 && map[ord][abs-1] == 0 && map[ord+1][abs] == 0)){%>
+            <img class="hg" src="../styles/images/carre2.png">
+          <% } %>
+
+        <!-- Coin : type 3 -->
+            <% if ((map[ord][abs-1] == 1 && map[ord+1][abs-1] == 1 && map[ord+1][abs-2] == 1 && map[ord+1][abs] == 0 && map[ord+2][abs-1] == 0)){%>
+              <img class="hg" src="../styles/images/carre3.png">
+            <% } %>
+
+        <!-- Coin : type 4 -->
+            <% if ((map[ord+1][abs-1] == 1 && map[ord+2][abs-1] == 1 && map[ord+1][abs] == 1 && map[ord][abs-1] == 0 && map[ord+1][abs-2] == 0)){%>
+              <img class="hg" src="../styles/images/carre4.png">
+            <% } %>
+
+        <!-- Coin : type 5 -->
+        <%if (map[ord+1][abs-1] == 1 && map[ord+2][abs-1] == 1 && map[ord+1][abs-2] == 0 && map[ord+1][abs] == 0 && map[ord][abs-1] == 0){%>
+          <img class="hg" src="../styles/images/carre_bas.png">
+        <% } %>
+
+        <!-- Coin : type 6 -->
+        <%if (map[ord+1][abs-1] == 1 && map[ord][abs-1] == 1 && map[ord+1][abs] == 0 && map[ord+2][abs-1] == 0 && map[ord+1][abs-2] == 0){%>
+          <img class="hg" src="../styles/images/carre_haut.png">
+        <% } %>
+
+        <!-- Coin : type 7 -->
+        <%if (map[ord+1][abs-1] == 1 && map[ord+1][abs-2] == 1 && map[ord+1][abs] == 0 && map[ord][abs-1] == 0 && map[ord+2][abs-1] == 0){%>
+          <img class="hg" src="../styles/images/carre_droite.png">
+        <% } %>
+
+        <!-- Coin : type 8 -->
+        <%if (map[ord+1][abs-1] == 1 && map[ord+1][abs] == 1 && map[ord+2][abs-1] == 0 && map[ord+1][abs-2] == 0 && map[ord][abs-1] == 0){%>
+          <img class="hg" src="../styles/images/carre_gauche.png">
+        <% } %>
+
+
+
+  <!-- Coin gauche bas -->
+
+          <% if (map[ord-1][abs-1] == 1){%>
+            <img class="bg" src="../styles/images/mur.png">
+          <% } %>
+
+          <%if (map[ord-1][abs-1] == 0){ %>
+            <img class="bg" src="../styles/images/vide.png">
+          <% } %>
+
+          <!-- Pas coin : 3 alignés -->
+          <% if ((map[ord][abs-1] == 1 && map[ord-1][abs-1] == 1  && map[ord-2][abs-1] == 1  && map[ord-1][abs] == 0) ||
+                 (map[ord-1][abs-2] == 1 && map[ord-1][abs-1] == 1 && map[ord-1][abs] == 1 && map[ord][abs-1] == 0))  {%>
+            <img class="bg" src="../styles/images/carre.png">
+          <% } %>
+
+          <!-- Coin : type 1 -->
+          <% if ((map[ord-1][abs-1] == 1 && map[ord-1][abs  ] == 1 && map[ord-2][abs-1] == 1 && map[ord][abs-1] == 0 && map[ord-1][abs-2] == 0)){%>
+            <img class="bg" src="../styles/images/carre1.png">
+          <% } %>
+
+          <!-- Coin : type 2 -->
+          <% if (map[ord-1][abs-1] == 1 && map[ord][abs-1] == 1  && map[ord-1][abs-2] == 1  && map[ord-1][abs] == 0 && map[ord-2][abs-1] == 0)  {%>
+            <img class="bg" src="../styles/images/carre2.png">
+          <% } %>
+
+
+          <!-- Coin : type 3 -->
+          <% if (map[ord-1][abs-1] == 1 && map[ord-1][abs-2] == 1 && map[ord-2][abs-1] == 1 && map[ord][abs-1] == 0  && map[ord-1][abs] == 0){%>
+            <img class="bg" src="../styles/images/carre3.png">
+          <% } %>
+
+          <!-- Coin : type 4 -->
+          <% if (map[ord-1][abs-1] == 1 && map[ord][abs-1] == 1 && map[ord-1][abs] == 1){%>
+            <img class="bg" src="../styles/images/carre4.png">
+          <% } %>
+
+          <!-- Coin : type 5 -->
+          <%if (map[ord-1][abs-1] == 1 && map[ord][abs-1] == 1 && map[ord-1][abs] == 0 && map[ord-1][abs-2] == 0 && map[ord-2][abs-1] == 0){%>
+            <img class="bg" src="../styles/images/carre_bas.png">
+          <% } %>
+
+          <!-- Coin : type 6 -->
+          <%if (map[ord-1][abs-1] == 1 && map[ord-2][abs-1] == 1 && map[ord][abs-1] == 0  && map[ord-1][abs] == 0 && map[ord-1][abs-2] == 0){%>
+            <img class="bg" src="../styles/images/carre_haut.png">
+          <% } %>
+
+          <!-- Coin : type 7  -->
+          <%if (map[ord-1][abs-1] == 1 && map[ord-1][abs-2] == 1 && map[ord-2][abs-1] == 0 && map[ord-1][abs] == 0 && map[ord][abs-1] == 0){%>
+            <img class="bg" src="../styles/images/carre_droite.png">
+          <% } %>
+
+          <!-- Coin : type 8  -->
+          <%if (map[ord-1][abs-1] == 1 && map[ord-1][abs] == 1 && map[ord][abs-1] == 0 && map[ord-2][abs-1] == 0 && map[ord-1][abs-2] == 0){%>
+            <img class="bg" src="../styles/images/carre_gauche.png">
+          <% } %>
+
+
+
+<!-- Milieu bas -->
+
+          <% if (map[ord-1][abs] == 1){%>
+            <img class="bm" src="../styles/images/mur.png">
+          <% } %>
+          <%if (map[ord-1][abs] == 0){ %>
+            <img class="bm" src="../styles/images/vide.png">
+          <% } %>
+
+          <!-- Pas coin : 3 alignés -->
+          <% if ((map[ord-1][abs] == 1 && map[ord-1][abs-1] == 1 && map[ord-1][abs+1] == 1)){%>
+            <img class="bm" src="../styles/images/carre.png">
+          <% } %>
+
+          <!-- Coin : type 1 -->
+          <% if ((map[ord-1][abs] == 1 && map[ord-1][abs+1] == 1 && map[ord-2][abs] == 1 && map[ord-1][abs-1] == 0 )){%>
+            <img class="bm" src="../styles/images/carre1.png">
+          <% } %>
+
+
+          <!-- Coin : type 2 : Pas possible -->
+
+          <!-- Coin : type 3 -->
+          <% if ((map[ord-1][abs] == 1 && map[ord-1][abs-1] == 1 && map[ord-2][abs] == 1 && map[ord-1][abs+1] == 0)){%>
+            <img class="bm" src="../styles/images/carre3.png">
+          <% } %>
+
+          <!-- Coin : type 4 : Pas possible-->
+
+          <!-- Coin : type 5 : Pas possible -->
+
+          <!-- Coin : type 6 -->
+          <%if ( map[ord-1][abs] == 1 && map[ord-1][abs-1] == 0  && map[ord-1][abs+1] == 0){%>
+            <img class="bm" src="../styles/images/carre_haut.png">
+          <% } %>
+
+          <!-- Coin : type 7  -->
+          <%if (map[ord-1][abs] == 1 && map[ord-1][abs-1] == 1 && map[ord-1][abs+1] == 0 && map[ord-2][abs] == 0){%>
+            <img class="bm" src="../styles/images/carre_droite.png">
+          <% } %>
+
+          <!-- Coin : type 8 -->
+          <%if (map[ord-1][abs] == 1 && map[ord-1][abs+1] == 1 && map[ord-1][abs-1] == 0 && map[ord-2][abs] == 0){%>
+            <img class="bm" src="../styles/images/carre_gauche.png">
+          <% } %>
+
+<!-- Coin droite bas-->
+
+          <% if (map[ord-1][abs+1] == 1){%>
+            <img class="bd" src="../styles/images/mur.png">
+          <% } %>
+          <%if (map[ord-1][abs+1] == 0){ %>
+            <img class="bd" src="../styles/images/vide.png">
+          <% } %>
+
+          <!-- Pas coin : 3 alignés -->
+          <% if ((map[ord-1][abs+1] == 1 && map[ord-2][abs+1] == 1 && map[ord][abs+1] == 1  && map[ord-1][abs] == 0) ||
+                 (map[ord-1][abs+2] == 1 && map[ord-1][abs+1] == 1 && map[ord-1][abs] == 1 && map[ord][abs+1] == 0)){%>
+            <img class="bd" src="../styles/images/carre.png">
+          <% } %>
+
+          <!-- Coin : type 1 -->
+          <% if (map[ord-1][abs+1] == 1 && map[ord-2][abs+1] == 1 && map[ord-1][abs+2] == 1 && map[ord][abs+1] == 0 && map[ord-1][abs] == 0){%>
+            <img class="bd" src="../styles/images/carre1.png">
+          <% } %>
+
+          <!-- Coin : type 2 -->
+          <% if (map[ord-1][abs] == 1 && map[ord-1][abs+1] == 1 && map[ord][abs+1] == 1){%>
+            <img class="bd" src="../styles/images/carre2.png">
+          <% } %>
+
+          <!-- Coin : type 3 -->
+          <% if (map[ord-1][abs+1] == 1 && map[ord-1][abs] == 1 && map[ord-2][abs+1] == 1 && map[ord][abs+1] == 0 && map[ord-1][abs+2] == 0){%>
+            <img class="bd" src="../styles/images/carre3.png">
+          <% } %>
+
+          <!-- Coin : type 4 -->
+          <% if (map[ord-1][abs+1] == 1 && map[ord][abs+1] == 1 && map[ord-1][abs+2] == 1 && map[ord-1][abs] == 0 && map[ord-2][abs+1] == 0 ){%>
+            <img class="bd" src="../styles/images/carre4.png">
+          <% } %>
+
+          <!-- Coin : type 5 -->
+          <%if (map[ord-1][abs+1] == 1 && map[ord][abs+1] == 1  && map[ord-2][abs+1] == 0 && map[ord-1][abs] == 0 && map[ord-1][abs+2] == 0 ){%>
+            <img class="bd" src="../styles/images/carre_bas.png">
+          <% } %>
+
+          <!-- Coin : type 6 -->
+          <%if ( map[ord-1][abs+1] == 1 && map[ord-2][abs+1] == 1 && map[ord-1][abs+2] == 0  && map[ord-1][abs] == 0 && map[ord][abs+1] == 0){%>
+            <img class="bd" src="../styles/images/carre_haut.png">
+          <% } %>
+
+          <!-- Coin : type 7 -->
+          <%if (map[ord-1][abs+1] == 1 && map[ord-1][abs] == 1 &&  map[ord-2][abs+1] == 0 && map[ord][abs+1] == 0  && map[ord-1][abs+2] == 0){%>
+            <img class="bd" src="../styles/images/carre_droite.png">
+          <% } %>
+
+          <!-- Coin : type 8 -->
+          <%if (map[ord-1][abs+1] == 1 && map[ord-1][abs+2] == 1 && map[ord-2][abs+1] == 0 && map[ord][abs+1] == 0  && map[ord-1][abs] == 0){%>
+            <img class="bd" src="../styles/images/carre_gauche.png">
+          <% } %>
+
+<!-- Milieu gauche -->
+          <% if (map[ord][abs-1] == 1){%>
+            <img class="mg" src="../styles/images/mur.png">
+          <% } %>
+          <%if (map[ord][abs-1] == 0){ %>
+            <img class="mg" src="../styles/images/vide.png">
+          <% } %>
+
+          <!-- Pas coin : 3 alignés -->
+          <% if (map[ord][abs-1] == 1 && map[ord+1][abs-1] == 1 && map[ord-1][abs-1] == 1){%>
+            <img class="mg" src="../styles/images/carre.png">
+          <% } %>
+
+          <!-- Coin : type 1 : Pas possible -->
+
+          <!-- Coin : type 2 -->
+          <% if ((map[ord][abs-1] == 1 && map[ord+1][abs-1] == 1 && map[ord][abs-2] == 1 && map[ord-1][abs-1] == 0)){%>
+            <img class="mg" src="../styles/images/carre2.png">
+          <% } %>
+
+          <!-- Coin : type 3 -->
+          <% if ((map[ord][abs-1] == 1 && map[ord][abs-2] == 1 && map[ord-1][abs-1] == 1 && map[ord+1][abs-1] == 0)){%>
+            <img class="mg" src="../styles/images/carre3.png">
+          <% } %>
+
+          <!-- Coin : type 4 : Pas possible -->
+
+          <!-- Coin : type 5 -->
+          <%if (map[ord][abs-1] == 1 && map[ord+1][abs-1] == 1 && map[ord][abs-2] == 0  && map[ord-1][abs-1] == 0 ){%>
+            <img class="mg" src="../styles/images/carre_bas.png">
+          <% } %>
+
+
+          <!-- Coin : type 6 -->
+          <%if (map[ord][abs-1] == 1 && map[ord-1][abs-1] == 1 && map[ord+1][abs-1] == 0  && map[ord][abs-2] == 0 ){%>
+            <img class="mg" src="../styles/images/carre_haut.png">
+          <% } %>
+
+          <!-- Coin : type 7 -->
+          <%if (map[ord][abs-1] == 1 && map[ord][abs-1] == 1 && map[ord+1][abs-1] == 0  && map[ord-1][abs-1] == 0){%>
+            <img class="mg" src="../styles/images/carre_droite.png">
+          <% } %>
+
+          <!-- Coin : type 8 : Pas possible -->
+
+
+
+<!-- Milieu droite -->
+          <% if (map[ord][abs+1] == 1){%>
+            <img class="md" src="../styles/images/mur.png">
+          <% } %>
+          <%if (map[ord][abs+1] == 0){ %>
+            <img class="md" src="../styles/images/vide.png">
+          <% } %>
+
+          <!-- Pas coin : 3 alignés -->
+          <% if (map[ord-1][abs+1] == 1 && map[ord+1][abs+1] == 1 && map[ord][abs+1] == 1){%>
+            <img class="md" src="../styles/images/carre.png">
+          <% } %>
+
+          <!-- Coin : type 1 -->
+          <% if ((map[ord-1][abs+1] == 1 && map[ord][abs+1] == 1 && map[ord][abs+2] == 1  && map[ord+1][abs] == 0 && map[ord+1][abs+1] == 0)){%>
+            <img class="md" src="../styles/images/carre1.png">
+          <% } %>
+
+          <!-- Coin : type 2 : Pas possible -->
+
+          <!-- Coin : type 3 : Pas possible -->
+
+          <!-- Coin : type 4 -->
+          <% if ((map[ord][abs+1] == 1 && map[ord+1][abs+1] == 1 && map[ord][abs+2] == 1  && map[ord-1][abs+1] == 0)){%>
+            <img class="md" src="../styles/images/carre4.png">
+          <% } %>
+
+          <!-- Coin : type 5 -->
+          <%if (map[ord][abs+1] == 1 && map[ord+1][abs+1] == 1 && map[ord][abs+2] == 0  && map[ord-1][abs+1] == 0 ){%>
+            <img class="md" src="../styles/images/carre_bas.png">
+          <% } %>
+
+          <!-- Coin : type 6 -->
+          <%if (map[ord][abs+1] == 1 && map[ord-1][abs+1] == 1 && map[ord+1][abs+1] == 0  && map[ord][abs+2] == 0){%>
+            <img class="md" src="../styles/images/carre_haut.png">
+          <% } %>
+          <!-- Coin : type 7 : Pas possible -->
+
+          <!-- Coin : type 8  -->
+          <%if (map[ord][abs+1] == 1 && map[ord][abs+2] == 1 && map[ord+1][abs+1] == 0 && map[ord-1][abs+1] == 0 ){%>
+            <img class="md" src="../styles/images/carre_gauche.png">
+          <% } %>
+
+<!-- Milieu haut-->
+
+          <% if (map[ord+1][abs] == 1){%>
+            <img class="hm" src="../styles/images/mur.png">
+          <% } %>
+          <%if (map[ord+1][abs] == 0){ %>
+            <img class="hm" src="../styles/images/vide.png">
+          <% } %>
+
+
+          <!-- Pas coin : 3 alignés -->
+          <%if (map[ord+1][abs] == 1 && map[ord+1][abs-1] == 1 && map[ord+1][abs+1] == 1){%>
+            <img class="hm" src="../styles/images/carre.png">
+          <% } %>
+
+          <!-- Coin : type 1 : Pas possible -->
+
+          <!-- Coin : type 2 -->
+          <%if (map[ord+1][abs] == 1 && map[ord+2][abs] == 1 && map[ord+1][abs-1] == 1 && map[ord+1][abs+1] == 0){%>
+            <img class="hm" src="../styles/images/carre2.png">
+          <% } %>
+          <!-- Coin : type 3  : Pas possible -->
+
+          <!-- Coin : type 4 -->
+          <%if (map[ord+1][abs] == 1 && map[ord+2][abs] == 1 && map[ord+1][abs+1] == 1 && map[ord+1][abs-1] == 0){%>
+            <img class="hm" src="../styles/images/carre4.png">
+          <% } %>
+
+          <!-- Coin : type 5 -->
+          <%if (map[ord+1][abs] == 1  && map[ord+2][abs] == 1 && map[ord+1][abs+1] == 0 && map[ord+1][abs-1] == 0){%>
+            <img class="hm" src="../styles/images/carre_bas.png">
+          <% } %>
+
+          <!-- Coin : type 6 :Pas possible -->
+
+          <!-- Coin : type 7 -->
+          <%if (map[ord+1][abs] == 1 && map[ord+1][abs-1] == 1 && map[ord+2][abs] == 0  && map[ord+1][abs+1] == 0){%>
+            <img class="hm" src="../styles/images/carre_droite.png">
+          <% } %>
+
+          <!-- Coin : type 8 -->
+          <%if (map[ord+1][abs] == 1 && map[ord+1][abs+1] == 1 && map[ord+1][abs-1] == 0 && map[ord+2][abs] == 0){%>
+            <img class="hm" src="../styles/images/carre_gauche.png">
+          <% } %>
+
+<!-- Coin droite haut -->
+          <% if (map[ord+1][abs+1] == 1){%>
+            <img class="hd" src="../styles/images/mur.png">
+          <% } %>
+
+          <%if (map[ord+1][abs+1] == 0){ %>
+            <img class="hd" src="../styles/images/vide.png">
+          <% } %>
+
+          <!-- Pas coin : 3 alignés -->
+          <% if ((map[ord][abs+1] == 1 && map[ord+1][abs+1] == 1 && map[ord+2][abs+1] == 1 && map[ord+1][abs] == 0) ||
+                 (map[ord+1][abs] == 1 && map[ord+1][abs+1] == 1 && map[ord+1][abs+2] == 1 && map[ord][abs+1] == 0)){%>
+                  <img class="hd" src="../styles/images/carre.png">
+          <% } %>
+
+          <!-- Coin : type 1 -->
+          <% if ((map[ord][abs+1] == 1 && map[ord+1][abs+1] == 1 && map[ord+1][abs+2] == 1  && map[ord+2][abs+1] == 0 && map[ord+1][abs] == 0)){%>
+            <img class="hd" src="../styles/images/carre1.png">
+          <% } %>
+
+          <!-- Coin : type 2 -->
+          <% if ((map[ord+1][abs+1] == 1 && map[ord+2][abs+1] == 1 && map[ord+1][abs] == 1  && map[ord][abs+1] == 0 && map[ord+1][abs+2] == 0)){%>
+            <img class="hd" src="../styles/images/carre2.png">
+          <% } %>
+          <!-- Coin : type 3 -->
+          <% if ((map[ord+1][abs+1] == 1 && map[ord+1][abs] == 1 && map[ord][abs+1] == 1)){%>
+            <img class="hd" src="../styles/images/carre3.png">
+          <% } %>
+
+        <!-- Coin : type 4 -->
+        <% if ((map[ord+1][abs+1] == 1 && map[ord+1][abs+2] == 1 && map[ord+2][abs+1] == 1  && map[ord+1][abs] == 0 && map[ord][abs+1] == 0)){%>
+          <img class="hd" src="../styles/images/carre4.png">
+        <% } %>
+
+        <!-- Coin : type 5 -->
+        <%if (map[ord+1][abs+1] == 1 && map[ord+2][abs+1] == 1 && map[ord+1][abs] == 0 && map[ord+1][abs+2] == 0  && map[ord][abs+1] == 0){%>
+          <img class="hd" src="../styles/images/carre_bas.png">
+        <% } %>
+
+        <!-- Coin : type 6 -->
+        <%if (map[ord+1][abs+1] == 1 && map[ord][abs+1] == 1 && map[ord+2][abs+1] == 0  && map[ord+1][abs] == 0 && map[ord+1][abs+2] == 0){%>
+          <img class="hd" src="../styles/images/carre_haut.png">
+        <% } %>
+
+        <!-- Coin : type 7 -->
+        <%if (map[ord+1][abs+1] == 1 && map[ord+1][abs] == 1 && map[ord+2][abs+1] == 0  && map[ord][abs+1] == 0  && map[ord+1][abs+2] == 0){%>
+          <img class="hd" src="../styles/images/carre_droite.png">
+        <% } %>
+
+        <!-- Coin : type 8 -->
+        <%if (map[ord+1][abs+1] == 1 && map[ord+1][abs+2] == 1 && map[ord+1][abs] == 0 && map[ord+2][abs+1] == 0  && map[ord][abs+1] == 0){%>
+          <img class="hd" src="../styles/images/carre_gauche.png">
+        <% } %>
+
+            <a href="/goup"><img class="up" src="../styles/images/up.png" border="0"></a>
+            <a href="/godown"><img class="down" src="../styles/images/down.png" border="0"></a>
+            <a href="/goright"><img class="right" src="../styles/images/right.png" border="0"></a>
+            <a href="/goleft"><img class="left" src="../styles/images/left.png" border="0"></a>
+
+        </div>
+    </body>
+</html>
+
+
+<!---9745 -->
