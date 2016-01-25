@@ -7,6 +7,14 @@ var app = express();
 app.use("/styles",express.static(__dirname + "/styles"));
 app.use(session({secret: 'todotopsecret'}))
 
+//Utilisation du clavier
+var stdin = process.stdin;
+stdin.setRawMode(true);
+stdin.resume();
+stdin.setEncoding('utf8');
+
+
+
 app.use(function(req, res, next){
     if (typeof(req.session.map) == 'undefined') {
         req.session.map=[
@@ -71,6 +79,24 @@ app.get('/goleft', function(req, res) {
         req.session.abs --;
     }
     res.redirect('/labyrinthe');
+});
+
+
+stdin.on('data', function(key){
+    if (key == '\u001B\u005B\u0041') {
+        process.stdout.write('up');
+    }
+    if (key == '\u001B\u005B\u0043') {
+        process.stdout.write('right');
+    }
+    if (key == '\u001B\u005B\u0042') {
+        process.stdout.write('down');
+    }
+    if (key == '\u001B\u005B\u0044') {
+        process.stdout.write('left');
+    }
+
+    if (key == '\u0003') { process.exit(); }    // ctrl-c
 });
 
 app.listen(8080);
