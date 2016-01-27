@@ -1,0 +1,221 @@
+h1
+{
+    color: red;
+}
+
+html {
+  background: url("images/background/test2.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+#game
+{
+    /*dimensions*/
+    width: 30%;
+    height: 30%;
+    padding: 15px;
+    border: 10px solid black;
+    margin: 0;
+
+	/*position*/
+    position: fixed;
+    left: 35%;
+    top: 30%;
+
+    background: url("images/sand.png");
+}
+
+#hg
+{
+	position: absolute;
+	width: 18.75%;
+	height: 33.3%;
+
+	left: 0%;
+	top: 0%;
+}
+
+#hm
+{
+	position: absolute;
+	width: 18.75%;
+	height: 33.3%;
+
+	left: 18.75%;
+	top: 0%;
+}
+
+#hd
+{
+	position: absolute;
+	width: 18.75%;
+	height: 33.3%;
+
+	left: 37.5%;
+	top: 0%;
+}
+
+
+
+
+
+
+#mg
+{
+	position: absolute;
+	width: 18.75%;
+	height: 33.3%;
+
+	left: 0%;
+	top: 33.3%;
+}
+
+#mm
+{
+	position: absolute;
+	width: 18.75%;
+	height: 33.3%;
+
+	left: 18.75%;
+	top: 33.3%;
+}
+
+#md
+{
+	position: absolute;
+	width: 18.75%;
+	height: 33.3%;
+
+	left: 37.5%;
+	top: 33.3%;
+}
+
+
+
+
+
+
+#bg
+{
+	position: absolute;
+	width: 18.75%;
+	height: 33.3%;
+
+	left: 0%;
+	top: 66.6%;
+}
+
+#bm
+{
+	position: absolute;
+	width: 18.75%;
+	height: 33.3%;
+
+	left: 18.75%;
+	top: 66.6%;
+}
+
+#bd
+{
+	position: absolute;
+	width: 18.75%;
+	height: 33.3%;
+
+	left: 37.5%;
+	top: 66.6%;
+}
+
+
+
+
+
+#up
+{
+	position: absolute;
+  width: 21.875%;
+  height: 20%;
+
+	left: 67.1875%;
+	top: 20%;
+}
+
+#down
+{
+	position: absolute;
+	width: 21.875%;
+	height: 20%;
+
+	left: 67.1875%;
+	top: 60%;
+}
+
+#left
+{
+	position: absolute;
+	width: 21.875%;
+	height: 20%;
+
+	left: 56.25%;
+	top: 40%;
+}
+
+#right
+{
+	position: absolute;
+	width: 21.875%;
+	height: 20%;
+
+	left: 78.125%;
+	top: 40%;
+}
+
+img.c1 {
+padding:1px 0px 0px 0px ;
+/*arrondir les coins en haut à gauche*/
+border-radius: 50px 0px 0px 0px ;
+}
+
+img.c2 {
+padding:0px 0px 1px 0px ;
+/*arrondir les coins en bas à droite*/
+border-radius: 0px 0px 50px 0px ;
+}
+
+img.c3 {
+padding:0px 1px 0px 0px ;
+/*arrondir les coins en haut à droite*/
+border-radius: 0px 50px 0px 0px ;
+}
+
+img.c4 {
+padding:0px 0px 0px 1px ;
+/*arrondir les coins en bas à gauche*/
+border-radius: 0px 0px 0px 50px ;
+}
+
+img.c5 {
+padding:0px px 1px 10px ;
+/*arrondir les coins en bas à gauche et en bas à droite*/
+border-radius: 0px 0px 50px 50px ;
+}
+
+img.c6 {
+padding:1px 1px 0px 0px ;
+/*arrondir les coins en haut à gauche et en haut à droite*/
+border-radius: 50px 50px 0px 0px ;
+}
+
+img.c7 {
+padding:0px 1px 1px 0px ;
+/*arrondir les coins en haut à droite et en bas à droite*/
+border-radius: 0px 50px 50px 0px ;
+}
+
+img.c8 {
+padding:1px 0px 0px 1px ;
+/*arrondir les coins en haut à gauche et en bas à gauche*/
+border-radius: 50px 0px 0px 50px ;
+}
