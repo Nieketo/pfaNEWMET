@@ -26,18 +26,30 @@
 
             // le client se connecte au serveur
             var socket = io.connect('http://localhost:8080');
-			var itrUp,itrDown,itrRight,itrLeft=0;
+			var cookies={
+					itrUp : 0,//0
+					itrDown : 0,//1
+					itrRight : 0,//2
+					itrLeft : 0//3
+					};
 			
             // Creer un cookies avec ça durée de vie 
             
-			function setCookie(sName, sValue) {
+			function setCookie(sName, cookies, direction) {
 
 			var today = new Date(), expires = new Date();
 
 			expires.setTime(today.getTime() + (365*24*60*60*1000));
+				if(direction ==0)
+					 document.cookie = sName + "=" + encodeURIComponent(++cookies.itrUp) + ";expires=" + expires.toGMTString();
+				if(direction ==1)
+					 document.cookie = sName + "=" + encodeURIComponent(++cookies.itrDown) + ";expires=" + expires.toGMTString();
+				if(direction ==2)
+					 document.cookie = sName + "=" + encodeURIComponent(++cookies.itrRight) + ";expires=" + expires.toGMTString();
+				if(direction ==3)
+					 document.cookie = sName + "=" + encodeURIComponent(++cookies.itrLeft) + ";expires=" + expires.toGMTString();
 
-			document.cookie = sName + "=" + encodeURIComponent(sValue++) + ";expires=" + expires.toGMTString();
-			
+
 			}
             
             // Prise en charge des cookies
@@ -56,30 +68,30 @@
             // on pourra aussi par la suite calculé le nombre de pas que l'utilisateur a éffectuer, on sommera tous les "itrDIRECTION". 
               
             function appuieUp() {
-				setCookie("cookieUp",itrUp);
+				setCookie("cookieUp",cookies,0);
                 socket.emit('clickUp');
 				
 						
             }
 
             function appuieDown() {
-				setCookie("cookieDown",itrDown);
+				setCookie("cookieDown",cookies,1);
                 socket.emit('clickDown');
 				
             }
 
-            function appuieLeft() {
-				setCookie("cookieLeft",itrLeft);
-                socket.emit('clickLeft');
-				
-            }
-
             function appuieRight() {
-				setCookie("cookieRight",itrRight);
+				setCookie("cookieRight",cookies,2);
                 socket.emit('clickRight');
 				
             }
 			
+			 function appuieLeft() {
+				setCookie("cookieLeft",cookies,3);
+                socket.emit('clickLeft');
+				
+            }
+            
 			// le client reçoit un message de type move avec la sous matrice correspondante au champs visuel, il met donc dans chaque emplacement mur ou vide
             // pour les hg, hm ..on a h(haut),m(milieu),b(bas) c la premiere lettre , puis pour la deuxieme lettre on a g(gauche) d(droite) m(milieu)
 
