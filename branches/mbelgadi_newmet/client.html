@@ -40,7 +40,7 @@
 
 			var today = new Date(), expires = new Date();
 
-			expires.setTime(today.getTime() + (365*24*60*60*1000));//durrée de vie d'un cookie c'est 1ans une fois dépasser le navigateur suprimera notre cookie 
+			expires.setTime(today.getTime() + (365*24*60*60*1000));//durrée de vie d'un cookie c'est 1 ans une fois dépasser le navigateur suprimera notre cookie 
 				if(direction ==0)
 					 document.cookie = sName + "=" + encodeURIComponent(++cookies.itrUp) + ";expires=" + expires.toGMTString();
 				if(direction ==1)
@@ -52,9 +52,37 @@
 
 
 			}
+			
+			//lire la valeur d'un cookie
+			
+			function getCookie(sName) {
 
-            
-            
+				var cookContent = document.cookie, cookEnd, i, j;
+				var sName = sName + "=";
+
+				for (i=0, c=cookContent.length; i<c; i++) {
+						j = i + sName.length;
+						if (cookContent.substring(i, j) == sName) {
+							cookEnd = cookContent.indexOf(";", j);
+							if (cookEnd == -1) {
+                                cookEnd = cookContent.length;
+							}
+                        return decodeURIComponent(cookContent.substring(j, cookEnd));
+					}
+				}       
+				return null;
+
+				}
+				
+			//initialise chaque cookie par sa valeur existante dans le navigateur ceci nous permet de récupérer le nombre de mouvement déja éffectuer 
+			
+            function initCookies(cookies){
+				cookies.itrUp=getCookie("cookieUp");
+				cookies.itrDown=getCookie("cookieDown");
+				cookies.itrRight=getCookie("cookieRight");
+				cookies.itrLeft=getCookie("cookieLeft");
+			}
+          
             //suprimer un cookie TODO(pour l'instant on n'a pas besoin de cette fonctionnalité )
             
             
@@ -65,8 +93,9 @@
             // on aurra en fin du compte 4 cookie chacun contient le nombre de fois que l'utilisateur a cliqué sur l'une des directions.
             // on pourra aussi par la suite calculé le nombre de pas que l'utilisateur a éffectuer, on sommera tous les champs du cookies -> "itrDIRECTION". 
             // la prise en charge des cookies est fait par un alert au cas ou les cookies sont désactivé
+            
             function appuieUp() {
-
+				initCookies(cookies);
 				if (navigator.cookieEnabled) {
 					setCookie("cookieUp",cookies,0);// CookieUp acceptés
 					socket.emit('clickUp');	
@@ -76,6 +105,7 @@
 				}
 
 				function appuieDown() {
+				initCookies(cookies);
 				if (navigator.cookieEnabled) {
 					setCookie("cookieDown",cookies,1);// CookieDown acceptés
 					socket.emit('clickDown');
@@ -85,6 +115,7 @@
 				}
 
 				function appuieRight() {
+				initCookies(cookies);
 				if (navigator.cookieEnabled) {
 					setCookie("cookieRight",cookies,2);// CookieRight acceptés
 					socket.emit('clickRight');
@@ -93,14 +124,15 @@
 								}
 				}
 				
-				 function appuieLeft() {
+				function appuieLeft() {
+				initCookies(cookies);
 				if (navigator.cookieEnabled) {	
 					setCookie("cookieLeft",cookies,3);// CookieLeft acceptés
 					socket.emit('clickLeft');
 						} else {
 						alert("Activez vos cookies pour jouer!");
 								}
-				}
+}
             
 			// le client reçoit un message de type move avec la sous matrice correspondante au champs visuel, il met donc dans chaque emplacement mur ou vide
             // pour les hg, hm ..on a h(haut),m(milieu),b(bas) c la premiere lettre , puis pour la deuxieme lettre on a g(gauche) d(droite) m(milieu)
