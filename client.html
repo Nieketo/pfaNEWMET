@@ -1,0 +1,123 @@
+<!-- COTE CLIENT -->
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+    	<meta charset="utf-8" />
+        <link rel="stylesheet" type="text/css"  href="styles/style.css" >  
+        <title>Bienvenue dans le labyrinthe !</title>
+        <style>
+            a {text-decoration: none; color: black;}
+            h1
+			{
+			    color: red;
+			}
+        </style>
+    </head>
+
+    <body>
+	
+        <!-- ici on charge jquery et socket.io -->
+		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+	
+		<script>
+
+            // le client se connecte au serveur
+            var socket = io.connect('http://localhost:8080');
+
+            // quand on appuie sur la fleche up le client envoie au serveur un message indiquant la direction ( ici c clickup)
+            function appuieUp() {
+                socket.emit('clickUp');
+            }
+
+            function appuieDown() {
+                socket.emit('clickDown');
+            }
+
+            function appuieLeft() {
+                socket.emit('clickLeft');
+            }
+
+            function appuieRight() {
+                socket.emit('clickRight');
+            }
+			
+			// le client reçoit un message de type move avec la sous matrice correspondante au champs visuel, il met donc dans chaque emplacement mur ou vide
+            // pour les hg, hm ..on a h(haut),m(milieu),b(bas) c la premiere lettre , puis pour la deuxieme lettre on a g(gauche) d(droite) m(milieu)
+
+            socket.on('move',function(matrice){
+
+				if (matrice[0][0]==0){
+                    // c un code en jquery, ici on identifie les images avec leurs identifiants(#hg) puis on modifie l'attribut source sans recharger la page
+                    $('#hg').attr('src','styles/images/vide.png');
+                }
+                if (matrice[0][0]==1){
+                    $('#hg').attr('src','styles/images/mur.png');
+                }
+                if (matrice[0][1]==0){
+                    $('#hm').attr('src','styles/images/vide.png');
+                }
+                if (matrice[0][1]==1){
+                    $('#hm').attr('src','styles/images/mur.png');
+                }
+                if (matrice[0][2]==0){
+                    $('#hd').attr('src','styles/images/vide.png');
+                }
+                if (matrice[0][2]==1){
+                    $('#hd').attr('src','styles/images/mur.png');
+                }
+                if (matrice[1][0]==0){
+                    $('#mg').attr('src','styles/images/vide.png');
+                }
+                if (matrice[1][0]==1){
+                    $('#mg').attr('src','styles/images/mur.png');
+                }
+                if (matrice[1][2]==0){
+                    $('#md').attr('src','styles/images/vide.png');
+                }
+                if (matrice[1][2]==1){
+                    $('#md').attr('src','styles/images/mur.png');
+                }
+                 if (matrice[2][0]==0){
+                    $('#bg').attr('src','styles/images/vide.png');
+                }
+                if (matrice[2][0]==1){
+                    $('#bg').attr('src','styles/images/mur.png');
+                }
+                if (matrice[2][1]==0){
+                    $('#bm').attr('src','styles/images/vide.png');
+                }
+                if (matrice[2][1]==1){
+                    $('#bm').attr('src','styles/images/mur.png');
+                }
+                if (matrice[2][2]==0){
+                    $('#bd').attr('src','styles/images/vide.png');
+                }
+                if (matrice[2][2]==1){
+                    $('#bd').attr('src','styles/images/mur.png');
+                }
+            });
+
+        </script>
+		
+    	<div id="game">
+                <!-- il s'agit du code html qui place les images initialement avant leur deplacement -->
+            	<img id="hg" src="styles/images/mur.png" />
+     			<img id="hm" src="styles/images/vide.png" />
+            	<img id="hd" src="./styles/images/mur.png" />
+       			<img id="mg" src="./styles/images/mur.png" />
+                <img id="mm" src="./styles/images/player.png" />
+            	<img id="md" src="./styles/images/mur.png" />
+       			<img id="bg" src="./styles/images/mur.png" />
+       			<img id="bm" src="./styles/images/vide.png" />
+            	<img id="bd" src="./styles/images/mur.png" />
+                <img id="up" src="styles/images/up.png" onClick="appuieUp();" /> 
+                <img id="down" src="styles/images/down.png"  onClick="appuieDown();" />
+                <img id="right" src="styles/images/right.png" onClick="appuieRight();" />
+                <img id="left" src="styles/images/left.png" onClick="appuieLeft();" />
+        </div> 
+       
+    </body>
+</html>
